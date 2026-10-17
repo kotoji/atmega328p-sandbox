@@ -21,7 +21,7 @@ SECTIONS
 {
   .vector :
   {
-    // --gc-sections flag removes vectors as unused without KEEP
+    /* --gc-sections flag removes vectors as unused without KEEP */
     KEEP(*(.vector));
     . = ALIGN(2);
   } >FLASH AT>FLASH
@@ -34,8 +34,8 @@ SECTIONS
     . = ALIGN(2);
   } >FLASH AT>FLASH
 
-  // the first 256 bytes of SRAM is reserved for registers
-  // (32 general purpose registers, 64 I/O registers, and 160 I/O Ext registers)
+  /* the first 256 bytes of SRAM is reserved for registers
+     (32 general purpose registers, 64 I/O registers, and 160 I/O Ext registers) */
   .dalign ORIGIN(SRAM) + __register_size:
   {
     . = ALIGN(2);
@@ -56,8 +56,8 @@ SECTIONS
     PROVIDE( _edata = . );
   } >SRAM AT>FLASH
 
-  // linker ignores .dalign, .dlalign, and .data sections when .data section is empty,
-  // so .bss section might be placed at the top of SRAM unless specified explicitly.
+  /* linker ignores .dalign, .dlalign, and .data sections when .data section is empty,
+     so .bss section might be placed at the top of SRAM unless specified explicitly. */
   .bss _edata (NOLOAD) :
   {
     . = ALIGN(1);
