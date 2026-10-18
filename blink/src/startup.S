@@ -138,8 +138,6 @@ handle_reset:
   brsh 2f
   rjmp 1b
 2:
-  /* enable interrupts */
-  sei
   /* call main */
   call main
 

@@ -1,12 +1,15 @@
-MCU        := atmega328p
-F_CPU      := 16000000UL
-BOOT_ADDR  := 0x7E00          # hfuse 0xDE = BOOTSZ 512B
+MCU                := atmega328p
+F_CPU              := 16000000UL
+BOOT_ADDR          := 0x7E00          # hfuse 0xDE = BOOTSZ 512B
+__AVR_ARCH__       := 5
+__AVR_ATmega328P__ := 1
 
 CC         := avr-gcc
 OBJCOPY    := avr-objcopy
 SIZE       := avr-size
 CFLAGS     := -mmcu=$(MCU) -DF_CPU=$(F_CPU) -Os -Wall -Wextra -std=gnu11 \
-              -ffunction-sections -fdata-sections
+              -ffunction-sections -fdata-sections \
+              -nostdinc -Ilib/include
 
 AVRDUDE      ?= avrdude
 AVRDUDE_CONF ?= -C /etc/avrdude.conf
@@ -20,7 +23,6 @@ CSRCS  := $(wildcard src/*.c)
 SOBJS  := $(SSRCS:src/%.S=$(BUILD)/%.o)
 COBJS  := $(CSRCS:src/%.c=$(BUILD)/%.o)
 OBJS   := $(SOBJS) $(COBJS)
-$(info $(OBJS))
 
 .PHONY: all
 all: clean upload

@@ -1,7 +1,4 @@
-// Data Direction Register for Port B
-#define DDRB (*(volatile unsigned char *)0x24)
-// State Register for Port B
-#define PORTB (*(volatile unsigned char *)0x25)
+#include <avr/io.h>
 
 static volatile unsigned int i;
 static volatile unsigned long j = 1;
