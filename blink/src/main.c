@@ -1,16 +1,12 @@
 #include <avr/io.h>
-
-static volatile unsigned int i;
-static volatile unsigned long j = 1;
+#include <util/delay.h>
 
 int main() {
-  DDRB |= 1 << 5; // Set PB5 as output (for the LED)
+  DDRB |= 1 << DDB5; // Set PB5 as output
   while (1) {
-    PORTB |= 1 << 5; // Set PB5 high (turn on the LED)
-    for (i = 0; i < 65000; i++) {
-    }
-    PORTB = 0;
-    for (j = 0; j < 65000; j++) {
-    }
+    PORTB |= 1 << PORTB5;
+    delay_ms(500);
+    PORTB &= ~(1 << PORTB5);
+    delay_ms(500);
   }
 }
