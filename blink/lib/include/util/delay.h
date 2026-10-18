@@ -23,7 +23,7 @@ void _delay_loop_2(uint16_t __count) {
                : "+w"(__count));
 }
 
-static inline void delay_ms(uint16_t ms) {
+static inline void _delay_ms(uint16_t ms) {
   while (ms--) {
     _delay_loop_2(F_CPU / 4 / 1000);
   }
